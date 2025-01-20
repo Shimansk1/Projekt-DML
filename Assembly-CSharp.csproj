@@ -60,6 +60,7 @@
     <Compile Include="Assets\InventoryScripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\ChestInventory.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventoryHolder.cs" />
+    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\SaveLoadCanvas.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\MouseItemData.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySlot.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventorySlot_UI.cs" />
@@ -67,15 +68,20 @@
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\PlayerInventoryHolder.cs" />
     <Compile Include="Assets\SceneSwitch.cs" />
     <Compile Include="Assets\InventoryScripts\Interactor.cs" />
+    <Compile Include="Assets\SaveLoadSystem\SaveData.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySystem.cs" />
     <Compile Include="Assets\Minimap\Minimap.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\DynamicInventoryDisplay.cs" />
+    <Compile Include="Assets\SaveLoadSystem\SaveGameManager.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\ItemPickup.cs" />
+    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\PlayerSaveData.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\StaticInventoryDisplay.cs" />
+    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\SaveGameTester.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryUIController.cs" />
     <Compile Include="Assets\Movement\MouseLook.cs" />
+    <Compile Include="Assets\ControlsOpener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CrystalShader.shader" />

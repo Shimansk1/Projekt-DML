@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -19,9 +20,23 @@ public class PlayerMovementScript : MonoBehaviour
     private Vector3 velocity;
     private bool IsGrounded;
     private bool IsSwimming; 
+    private bool IsSprinting = false;
 
     void Update()
     {
+        if (Keyboard.current.leftShiftKey.isPressed && !IsSwimming && IsGrounded && Keyboard.current.wKey.isPressed)
+        {
+            Speed = 16f;
+            Debug.Log("is sprinting");
+            IsSprinting = true;
+        }
+        else
+        {
+            Speed = 12f;
+            //Debug.Log("isnt sprinting");
+            IsSprinting = false;
+        }
+
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
 
         IsSwimming = Physics.CheckSphere(WaterCheck.position, GroundDistance, WaterLayer);
