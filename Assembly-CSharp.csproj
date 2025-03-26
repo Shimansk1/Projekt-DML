@@ -57,31 +57,44 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PlayerHealth.cs" />
     <Compile Include="Assets\InventoryScripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\ChestInventory.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventoryHolder.cs" />
-    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\SaveLoadCanvas.cs" />
+    <Compile Include="Assets\InventoryScripts\ItemScripts\Database.cs" />
+    <Compile Include="Assets\SceneManagment\SaveLoadCanvas.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\MouseItemData.cs" />
+    <Compile Include="Assets\SaveLoad\SaveData.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySlot.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventorySlot_UI.cs" />
     <Compile Include="Assets\Movement\PlayerMovementScript.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\PlayerInventoryHolder.cs" />
-    <Compile Include="Assets\SceneSwitch.cs" />
+    <Compile Include="Assets\SceneManagment\SceneSwitch.cs" />
     <Compile Include="Assets\InventoryScripts\Interactor.cs" />
-    <Compile Include="Assets\SaveLoadSystem\SaveData.cs" />
+    <Compile Include="Assets\PlayerUI.cs" />
+    <Compile Include="Assets\TransformSaveLoadSystem\TransformSaveData.cs" />
+    <Compile Include="Assets\SaveLoad\SaveLoad.cs" />
+    <Compile Include="Assets\SaveLoad\UniqueID.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySystem.cs" />
     <Compile Include="Assets\Minimap\Minimap.cs" />
+    <Compile Include="Assets\SaveLoad\SaveGameManager.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\DynamicInventoryDisplay.cs" />
-    <Compile Include="Assets\SaveLoadSystem\SaveGameManager.cs" />
+    <Compile Include="Assets\TransformSaveLoadSystem\SaveGameManageris.cs" />
+    <Compile Include="Assets\Gathering\Rock.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\ItemPickup.cs" />
-    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\PlayerSaveData.cs" />
+    <Compile Include="Assets\SaveLoad\SerializableDictionary.cs" />
+    <Compile Include="Assets\TransformSaveLoadSystem\PositionSaveScripts\PlayerSaveData.cs" />
+    <Compile Include="Assets\SceneManagment\ControlsOpener.cs" />
+    <Compile Include="Assets\Gathering\Gatherer.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\StaticInventoryDisplay.cs" />
-    <Compile Include="Assets\SaveLoadSystem\PositionSaveScripts\SaveGameTester.cs" />
+    <Compile Include="Assets\SaveLoad\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Gathering\Tree.cs" />
+    <Compile Include="Assets\TransformSaveLoadSystem\PositionSaveScripts\SaveGameTester.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryUIController.cs" />
     <Compile Include="Assets\Movement\MouseLook.cs" />
-    <Compile Include="Assets\ControlsOpener.cs" />
+    <Compile Include="Assets\music\MenuMusic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CrystalShader.shader" />

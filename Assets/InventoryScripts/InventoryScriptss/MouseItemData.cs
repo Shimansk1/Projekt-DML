@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-//using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class MouseItemData : MonoBehaviour
@@ -12,17 +11,28 @@ public class MouseItemData : MonoBehaviour
     public TextMeshProUGUI ItemCount;
     public InventorySlot AssignedInventorySlot;
 
+    public Transform _playerTransform;
+    public float _dropOffset = 3f;
+
     private void Awake()
     {
+        ItemSprite.preserveAspect = true;
+
         ItemSprite.color = Color.clear;
         ItemCount.text = "";
+
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     public void UpdateMouseSlot(InventorySlot invSlot)
     {
         AssignedInventorySlot.AssignItem(invSlot);
-        ItemSprite.sprite = invSlot.ItemData.Icon;
-        ItemCount.text = invSlot.StackSize.ToString();
+        UpdateMouseSlot();
+    }
+    public void UpdateMouseSlot()
+    {
+        ItemSprite.sprite = AssignedInventorySlot.ItemData.Icon;
+        ItemCount.text = AssignedInventorySlot.StackSize.ToString();
         ItemSprite.color = Color.white;
         Debug.Log(ItemCount.text);
     }
@@ -36,7 +46,22 @@ public class MouseItemData : MonoBehaviour
             //Debug.Log("milan je sebran");
                 if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
                 {
-                     ClearSlot();
+                if (AssignedInventorySlot.ItemData.ItemPrefab != null)
+                {
+                    Vector3 spawnPosition = _playerTransform.position + _playerTransform.forward * _dropOffset;
+                    spawnPosition.y -= 1.5f;
+
+                    Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, spawnPosition, Quaternion.identity);
+                }
+                if(AssignedInventorySlot.StackSize > 1)
+                {
+                    AssignedInventorySlot.AddToStack(-1);
+                    UpdateMouseSlot();
+                }
+                else
+                {
+                ClearSlot();
+                }
                 }
         }
     }
@@ -54,6 +79,17 @@ public class MouseItemData : MonoBehaviour
         eventDataCurrentPosition.position = Mouse.current.position.ReadValue();
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
+
+        foreach (RaycastResult result in results)
+        {
+            Debug.Log("Hit UI Element: " + result.gameObject.name);
+            // Pokud je to konkrétní UI prvek, který má blokovat drop
+            if (result.gameObject.CompareTag("UI"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
+
 }

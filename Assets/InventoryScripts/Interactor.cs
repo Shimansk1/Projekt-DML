@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
 
     public bool IsInteracting {  get; private set; }
 
-    [SerializeField] private MouseLook mouseLook; // Odkaz na MouseLook script
+    [SerializeField] private MouseLook mouseLook;
 
     private void Update()
     {
@@ -19,19 +19,24 @@ public class Interactor : MonoBehaviour
 
         if(Keyboard.current.eKey.wasPressedThisFrame)
         {
-            for (int i = 0;i<colliders.Length;i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                var interactable = colliders[i].GetComponent<IInteractable>(); 
-                mouseLook.canMove = false; // Zastavit pohyb kamery
+                var interactable = colliders[i].GetComponentInParent<IInteractable>();
+
+                Debug.Log($"Nalezený objekt: {colliders[i].name}, interactable: {interactable}");
+
+                mouseLook.canMove = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+
                 if (interactable != null) StartInteraction(interactable);
             }
+
         }
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && IsInteracting)
         {
             Cursor.visible = false;
-            mouseLook.canMove = true; // Zastavit pohyb kamery
+            mouseLook.canMove = true;
             Cursor.lockState = CursorLockMode.Locked;
         }
     }

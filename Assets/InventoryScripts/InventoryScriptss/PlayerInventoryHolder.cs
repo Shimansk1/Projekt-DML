@@ -6,20 +6,26 @@ using UnityEngine.InputSystem;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
-    [SerializeField] protected int secondaryInventorySize;
-    [SerializeField] protected InventorySystem secondaryInventorySystem;
     [SerializeField] private MouseLook mouseLook;
 
-    public InventorySystem SecondaryInventorySystem => secondaryInventorySystem;
+    public static UnityAction OnPlayerInventoryChanged;
 
-    public static UnityAction<InventorySystem> OnPlayerBackpackDisplayRequested;
+    public static UnityAction<InventorySystem, int> OnPlayerInventoryDisplayRequested;
 
     private bool isInventoryOpen = false;
 
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-        secondaryInventorySystem = new InventorySystem(secondaryInventorySize);
+        SaveGameManager.data.playerInventory = new InventorySaveData(primaryInventorySystem);
+    }
+
+    protected override void LoadInventory(SaveData data)
+    {
+        if (data.playerInventory.InvSystem != null)
+        {
+            this.primaryInventorySystem = data.playerInventory.InvSystem;
+            OnPlayerInventoryChanged?.Invoke();
+        }
     }
 
     void Update()
@@ -27,7 +33,7 @@ public class PlayerInventoryHolder : InventoryHolder
         if (Keyboard.current.bKey.wasPressedThisFrame && !isInventoryOpen)
         {
             isInventoryOpen = true;
-            OnPlayerBackpackDisplayRequested?.Invoke(secondaryInventorySystem);
+            OnPlayerInventoryDisplayRequested?.Invoke(primaryInventorySystem, offset);
 
             Cursor.lockState = CursorLockMode.None; 
             Cursor.visible = true;
@@ -48,10 +54,6 @@ public class PlayerInventoryHolder : InventoryHolder
 public bool AddToInventory(InventoryItemData data, int amount)
     {
         if (primaryInventorySystem.AddToInventory(data, amount))
-        {
-            return true;
-        }
-        else if (secondaryInventorySystem.AddToInventory(data, amount))
         {
             return true;
         }

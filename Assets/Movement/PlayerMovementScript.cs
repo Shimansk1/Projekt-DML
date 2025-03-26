@@ -20,21 +20,18 @@ public class PlayerMovementScript : MonoBehaviour
     private Vector3 velocity;
     private bool IsGrounded;
     private bool IsSwimming; 
-    private bool IsSprinting = false;
 
     void Update()
     {
         if (Keyboard.current.leftShiftKey.isPressed && !IsSwimming && IsGrounded && Keyboard.current.wKey.isPressed)
         {
             Speed = 16f;
-            Debug.Log("is sprinting");
-            IsSprinting = true;
+            //Debug.Log("is sprinting");
         }
         else
         {
             Speed = 12f;
             //Debug.Log("isnt sprinting");
-            IsSprinting = false;
         }
 
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
