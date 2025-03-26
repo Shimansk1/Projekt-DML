@@ -37,6 +37,7 @@ public class PlayerSaveData : MonoBehaviour
             Debug.Log("Loaded");
             SaveGameManageris.LoadGame();
             
+            Debug.Log(MyData.PlayerPosition);
             Invoke(nameof(EnableMovement), 0.25f);
         }
     }
