@@ -30,16 +30,22 @@ public class PlayerSaveData : MonoBehaviour
         if (Keyboard.current.f2Key.wasPressedThisFrame)
         {
             MovementScript.enabled = false;
+
+            SaveGameManageris.LoadGame(); // Tohle musí být jako PRVNÍ
+
             MyData = SaveGameManageris.CurrentSaveData.playerData;
             transform.position = MyData.PlayerPosition;
             transform.rotation = MyData.PlayerRotation;
-            MyData.CurrentHealth = playerHealth.currentHealth;
-            Debug.Log("Loaded");
-            SaveGameManageris.LoadGame();
-            
-            Debug.Log(MyData.PlayerPosition);
+            playerHealth.currentHealth = MyData.CurrentHealth;
+
+            Debug.Log("Loaded position: " + MyData.PlayerPosition);
             Invoke(nameof(EnableMovement), 0.25f);
         }
+        if (Keyboard.current.f3Key.wasPressedThisFrame)
+        {
+            SaveGameManageris.DeleteSaveData();
+        }
+
     }
     private void EnableMovement()
     {

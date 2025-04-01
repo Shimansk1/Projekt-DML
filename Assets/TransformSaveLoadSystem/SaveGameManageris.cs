@@ -44,5 +44,11 @@ public class SaveGameManageris
 
             CurrentSaveData = tempData;
         }
+        public static void DeleteSaveData()
+        {
+            string fullPath = Application.persistentDataPath + SaveDirectory + FileName;
+
+            if (File.Exists(fullPath)) File.Delete(fullPath);
+        }
     }
 }
