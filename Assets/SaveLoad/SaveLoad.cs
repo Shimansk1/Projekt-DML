@@ -1,6 +1,8 @@
+// SaveLoad.cs
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +16,6 @@ public class SaveLoad
 
     public static bool Save(SaveData data)
     {
-
         OnSaveGame?.Invoke();
 
         string dir = Application.persistentDataPath + directory;
@@ -30,6 +31,7 @@ public class SaveLoad
 
         return true;
     }
+
     public static SaveData Load()
     {
         string fullPath = Application.persistentDataPath + directory + fileName;
@@ -40,7 +42,8 @@ public class SaveLoad
             string json = File.ReadAllText(fullPath);
             data = JsonUtility.FromJson<SaveData>(json);
 
-            OnLoadGame?.Invoke(data);
+            // Odložené volání, až po jednom snímku (aby se scéna stihla naèíst)
+            CoroutineRunner.Instance.StartCoroutine(InvokeOnLoadGameNextFrame(data));
         }
         else
         {
@@ -48,10 +51,17 @@ public class SaveLoad
         }
         return data;
     }
+
+    private static IEnumerator InvokeOnLoadGameNextFrame(SaveData data)
+    {
+        yield return null; // poèkej jeden frame
+        OnLoadGame?.Invoke(data);
+    }
+
     public static void DeleteSaveData()
     {
         string fullPath = Application.persistentDataPath + directory + fileName;
-    
-        if(File.Exists(fullPath))  File.Delete(fullPath); 
+
+        if (File.Exists(fullPath)) File.Delete(fullPath);
     }
 }

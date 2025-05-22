@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E8805D2E-E1FF-AC73-AB59-1CE7CD5D4C46}</ProjectGuid>
+    <ProjectGuid>{6271B957-4980-9EDC-89F4-7E29B48F79EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,9 +57,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\PlayerHealth.cs" />
+    <Compile Include="Assets\PlayerHealth\PlayerHealth.cs" />
     <Compile Include="Assets\InventoryScripts\Interfaces\IInteractable.cs" />
+    <Compile Include="Assets\Tempature scripts\TempatureSystem.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\ChestInventory.cs" />
+    <Compile Include="Assets\Weather\WeatherManager.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventoryHolder.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\Database.cs" />
     <Compile Include="Assets\SceneManagment\SaveLoadCanvas.cs" />
@@ -70,17 +72,20 @@
     <Compile Include="Assets\Movement\PlayerMovementScript.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\PlayerInventoryHolder.cs" />
     <Compile Include="Assets\SceneManagment\SceneSwitch.cs" />
+    <Compile Include="Assets\PlayerHealth\PlayerNeeds.cs" />
     <Compile Include="Assets\InventoryScripts\Interactor.cs" />
-    <Compile Include="Assets\PlayerUI.cs" />
+    <Compile Include="Assets\PlayerHealth\PlayerUI.cs" />
     <Compile Include="Assets\TransformSaveLoadSystem\TransformSaveData.cs" />
     <Compile Include="Assets\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\SaveLoad\UniqueID.cs" />
+    <Compile Include="Assets\Tempature scripts\DayNightCycle.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySystem.cs" />
     <Compile Include="Assets\Minimap\Minimap.cs" />
     <Compile Include="Assets\SaveLoad\SaveGameManager.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\DynamicInventoryDisplay.cs" />
     <Compile Include="Assets\TransformSaveLoadSystem\SaveGameManageris.cs" />
+    <Compile Include="Assets\CoroutineRunner.cs" />
     <Compile Include="Assets\Gathering\Rock.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\ItemPickup.cs" />
@@ -91,6 +96,7 @@
     <Compile Include="Assets\InventoryScripts\UI_Scripts\StaticInventoryDisplay.cs" />
     <Compile Include="Assets\SaveLoad\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Gathering\Tree.cs" />
+    <Compile Include="Assets\Weather\WeatherType.cs" />
     <Compile Include="Assets\TransformSaveLoadSystem\PositionSaveScripts\SaveGameTester.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventoryUIController.cs" />
     <Compile Include="Assets\Movement\MouseLook.cs" />

@@ -1,79 +1,103 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SaveGameManager : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
-    [SerializeField] GameObject deathScreen;
-    private PlayerHealth playerHealth;
-    public bool respawned = false;
+    [Header("Reference")]
+    [SerializeField] private GameObject deathScreen;
     [SerializeField] private MouseLook mouseLook;
 
+    private PlayerHealth playerHealth;
+    private PlayerNeeds playerNeeds;
+    private GameObject Player;
 
-    private void Update()
-    {
-        if(Keyboard.current.f1Key.wasPressedThisFrame)
-        {
-            SaveData();
-        }
-        if (Keyboard.current.f2Key.wasPressedThisFrame)
-        {
-            TryLoadData();
-        }
-        if (Keyboard.current.f3Key.wasPressedThisFrame)
-        {
-            DeleteData();
-        }
-    }
+    public bool respawned = false;
     public static SaveData data;
+
     private void Awake()
     {
         data = new SaveData();
         SaveLoad.OnLoadGame += LoadData;
     }
-    public void DeleteData()
+
+    private void Update()
     {
-        SaveLoad.DeleteSaveData();
+        if (Keyboard.current.f1Key.wasPressedThisFrame) SaveData();
+        if (Keyboard.current.f2Key.wasPressedThisFrame) TryLoadData();
+        if (Keyboard.current.f3Key.wasPressedThisFrame) DeleteData();
     }
+
     public static void SaveData()
     {
-        var saveData = data;
-
-        SaveLoad.Save(saveData);
+        SaveLoad.Save(data);
     }
+
     public static void LoadData(SaveData _data)
     {
         data = _data;
     }
+
     public static void TryLoadData()
     {
         SaveLoad.Load();
     }
+
+    public void DeleteData()
+    {
+        SaveLoad.DeleteSaveData();
+    }
+
     public void Respawn()
     {
-        Player.transform.position = new Vector3(-82.21f, -3.52f, 50.64f);
         deathScreen.SetActive(false);
-        Debug.Log("Hráè byl respawnut!");
+        Debug.Log("?? Hráè byl respawnut!");
 
-        // Oprava - najdi PlayerHealth a resetuj ho
-        playerHealth = Player.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
         {
-            playerHealth.currentHealth = 100;
-            playerHealth.isDead = false;
-            playerHealth.playerMovementScript.enabled = true;
+            Player = playerObj;
+            playerHealth = Player.GetComponent<PlayerHealth>();
+            playerNeeds = Player.GetComponent<PlayerNeeds>();
+
+            if (playerHealth != null && playerNeeds != null)
+            {
+                playerHealth.currentHealth = 100;
+                playerNeeds.currentHunger = 100;
+                playerNeeds.currentThirst = 100;
+                playerHealth.isDead = false;
+
+                // Nejprve deaktivuj skript pohybu
+                playerHealth.playerMovementScript.enabled = false;
+
+                // ? Posuò hráèe o nìco výš, aby nepropadl
+                Player.transform.position = new Vector3(-82.21f, -3.0f, 50.64f);
+
+                // Až pak znovu aktivuj pohyb
+                Invoke(nameof(EnableMovement), 0.1f);
+            }
+            else
+            {
+                Debug.LogError("? Chybí komponenty PlayerHealth nebo PlayerNeeds!");
+            }
         }
         else
         {
-            Debug.LogError("PlayerHealth nebyl nalezen!");
+            Debug.LogError("? Objekt s tagem 'Player' nebyl nalezen!");
         }
 
         respawned = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         mouseLook.canMove = true;
+    }
+
+    private void EnableMovement()
+    {
+        if (playerHealth != null)
+        {
+            playerHealth.playerMovementScript.enabled = true;
+        }
     }
 }

@@ -7,7 +7,7 @@ public class MenuMusic : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject); // Hudba zùstane hrát i pøi pøechodu scén
+       // DontDestroyOnLoad(gameObject); // Hudba zùstane hrát i pøi pøechodu scén
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
