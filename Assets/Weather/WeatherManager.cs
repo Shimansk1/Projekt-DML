@@ -33,6 +33,14 @@ public class WeatherManager : MonoBehaviour
     public WeatherSceneSetup currentWeather;
     private AudioSource audioSource;
 
+    [Header("Night Mode")]
+    public GameObject[] nightSkydomeObjects;
+    public GameObject[] nightEffects;
+    public Color nightDirectionalLightColor = new Color(0.2f, 0.2f, 0.4f);
+    public float nightLightIntensity = 0.2f;
+
+    public DayNightCycle dayNightCycle;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -43,10 +51,69 @@ public class WeatherManager : MonoBehaviour
     {
         while (true)
         {
+            if (dayNightCycle != null && dayNightCycle.IsNight)
+            {
+                ActivateNightMode();
+                while (dayNightCycle.IsNight)
+                {
+                    yield return new WaitForSeconds(5f);
+                }
+                DeactivateNightMode();
+            }
+
             var newWeather = GetWeatherByProbability();
             yield return StartCoroutine(TransitionWeather(newWeather));
-            yield return new WaitForSeconds(weatherChangeInterval);
+
+            float timer = 0f;
+            while (timer < weatherChangeInterval)
+            {
+                if (dayNightCycle != null && dayNightCycle.IsNight)
+                    break;
+
+                timer += Time.deltaTime;
+                yield return null;
+            }
         }
+    }
+
+    private void ActivateNightMode()
+    {
+        if (currentWeather != null)
+        {
+            foreach (var obj in currentWeather.weatherEffects)
+                if (obj) obj.SetActive(false);
+
+            foreach (var sky in currentWeather.skydomeObjects)
+                if (sky) sky.SetActive(false);
+        }
+
+        foreach (var obj in nightSkydomeObjects)
+            if (obj) obj.SetActive(true);
+
+        foreach (var effect in nightEffects)
+            if (effect) effect.SetActive(true);
+
+        if (directionalLight != null)
+        {
+            directionalLight.color = nightDirectionalLightColor;
+            directionalLight.intensity = nightLightIntensity;
+        }
+
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        StartCoroutine(ApplyFog(true, new Color(0.1f, 0.1f, 0.2f), 0.004f));
+    }
+
+    private void DeactivateNightMode()
+    {
+        foreach (var obj in nightSkydomeObjects)
+            if (obj) obj.SetActive(false);
+
+        foreach (var effect in nightEffects)
+            if (effect) effect.SetActive(false);
     }
 
     private WeatherSceneSetup GetWeatherByProbability()
@@ -66,7 +133,11 @@ public class WeatherManager : MonoBehaviour
 
     private IEnumerator TransitionWeather(WeatherSceneSetup newWeather)
     {
-        // Přechodová mlha, ale ne při přechodu DO foggy
+        if (dayNightCycle != null)
+        {
+            dayNightCycle.BlockLightControl = (newWeather.weatherType != WeatherType.Sunny);
+        }
+
         if (newWeather.weatherType != WeatherType.Foggy)
         {
             yield return StartCoroutine(ApplyFog(true, transitionFogColor, transitionFogDensity));
@@ -77,7 +148,6 @@ public class WeatherManager : MonoBehaviour
         if (directionalLight != null)
             yield return StartCoroutine(TransitionLightColor(newWeather.directionalLightColor));
 
-        // Vypnout předchozí efekty
         if (currentWeather != null)
         {
             foreach (var obj in currentWeather.weatherEffects)
@@ -87,14 +157,12 @@ public class WeatherManager : MonoBehaviour
                 if (sky) sky.SetActive(false);
         }
 
-        // Zapnout nové efekty
         foreach (var obj in newWeather.weatherEffects)
             if (obj) obj.SetActive(true);
 
         foreach (var sky in newWeather.skydomeObjects)
             if (sky) sky.SetActive(true);
 
-        // Zvuk
         if (newWeather.weatherSound != null)
         {
             audioSource.clip = newWeather.weatherSound;
@@ -105,7 +173,6 @@ public class WeatherManager : MonoBehaviour
 
         currentWeather = newWeather;
 
-        // Aplikuj finální mlhu
         if (newWeather.weatherType == WeatherType.Foggy)
         {
             yield return StartCoroutine(ApplyFog(true, foggyColor, foggyDensity));

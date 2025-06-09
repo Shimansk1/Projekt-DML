@@ -17,5 +17,5 @@ MonoBehaviour:
   Description: Wooden plank
   Icon: {fileID: 21300000, guid: 489f6dbab1c5e75438d78791c9faecbd, type: 3}
   MaxStackSize: 64
-  GoldValue: 1
+  GoldValue: 0
   ItemPrefab: {fileID: 6824839790319684347, guid: 750e30142d72be242a3d7a2080a0f47f, type: 3}

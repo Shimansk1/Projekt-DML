@@ -57,19 +57,22 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Temperature scripts\TemperatureSystem.cs" />
     <Compile Include="Assets\PlayerHealth\PlayerHealth.cs" />
     <Compile Include="Assets\InventoryScripts\Interfaces\IInteractable.cs" />
-    <Compile Include="Assets\Tempature scripts\TempatureSystem.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\ChestInventory.cs" />
     <Compile Include="Assets\Weather\WeatherManager.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventoryHolder.cs" />
     <Compile Include="Assets\InventoryScripts\ItemScripts\Database.cs" />
+    <Compile Include="Assets\RainSplashManager.cs" />
     <Compile Include="Assets\SceneManagment\SaveLoadCanvas.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\MouseItemData.cs" />
     <Compile Include="Assets\SaveLoad\SaveData.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySlot.cs" />
     <Compile Include="Assets\InventoryScripts\UI_Scripts\InventorySlot_UI.cs" />
+    <Compile Include="Assets\Temperature scripts\TemperatureUI.cs" />
     <Compile Include="Assets\Movement\PlayerMovementScript.cs" />
+    <Compile Include="Assets\Temperature scripts\FireZone.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\PlayerInventoryHolder.cs" />
     <Compile Include="Assets\SceneManagment\SceneSwitch.cs" />
     <Compile Include="Assets\PlayerHealth\PlayerNeeds.cs" />
@@ -78,7 +81,7 @@
     <Compile Include="Assets\TransformSaveLoadSystem\TransformSaveData.cs" />
     <Compile Include="Assets\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\SaveLoad\UniqueID.cs" />
-    <Compile Include="Assets\Tempature scripts\DayNightCycle.cs" />
+    <Compile Include="Assets\Temperature scripts\DayNightCycle.cs" />
     <Compile Include="Assets\InventoryScripts\InventoryScriptss\InventorySystem.cs" />
     <Compile Include="Assets\Minimap\Minimap.cs" />
     <Compile Include="Assets\SaveLoad\SaveGameManager.cs" />

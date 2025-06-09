@@ -19,7 +19,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private Vector3 velocity;
     private bool IsGrounded;
-    private bool IsSwimming; 
+    public bool IsSwimming; 
 
     void Update()
     {
