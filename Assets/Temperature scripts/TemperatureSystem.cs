@@ -95,12 +95,12 @@ public class TemperatureSystem : MonoBehaviour
                 currentTemperature = targetTemperature;
         }
 
-        Debug.Log($"🌡 Aktuální teplota: {currentTemperature}°C");
+        //Debug.Log($"🌡 Aktuální teplota: {currentTemperature}°C");
 
         if (currentTemperature < safeMinTemperature || currentTemperature > safeMaxTemperature)
         {
             playerHealth.TakeDamage(damagePerTick);
-            Debug.Log("🔥 Extrémní teplota – hráč dostává damage!");
+            //Debug.Log("🔥 Extrémní teplota – hráč dostává damage!");
         }
     }
 }

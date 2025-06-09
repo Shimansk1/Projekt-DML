@@ -14,4 +14,11 @@ public class InventoryItemData : ScriptableObject
     public int MaxStackSize;
     public int GoldValue;
     public GameObject ItemPrefab;
+
+    public void UseItem()
+    {
+        Debug.Log($"Using{DisplayName}");
+    }
+
+
 }

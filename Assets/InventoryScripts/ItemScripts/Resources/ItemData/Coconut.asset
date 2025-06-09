@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478593355f2cfc44b84f33643f7e4e00, type: 3}
   m_Name: Coconut
   m_EditorClassIdentifier: 
-  ID: 45
+  ID: 2
   DisplayName: Coconut
   Description: Eat coconut
   Icon: {fileID: 21300000, guid: cc07f133aa02a5d4fbf16e642bdf6df2, type: 3}

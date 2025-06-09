@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478593355f2cfc44b84f33643f7e4e00, type: 3}
   m_Name: RUM
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 11
   DisplayName: Rum
   Description: Have a taste of this delicious rum
   Icon: {fileID: 21300000, guid: 93ffe687ef3cbbe428241ccd30ddec50, type: 3}
