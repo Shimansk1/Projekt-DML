@@ -4,6 +4,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(UniqueID))]
 public class ChestInventory : InventoryHolder, IInteractable
 {
+    public bool RequiresCursorLock => true;
+
     public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
     protected override void Awake()

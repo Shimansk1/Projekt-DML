@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2901534823032253176}
   - component: {fileID: 3301031936873181495}
   - component: {fileID: 2292685395872251024}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PirateFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191188, guid: ad75a0e63b46d8d438738423a74e797f, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440952, guid: ad75a0e63b46d8d438738423a74e797f, type: 3}
       propertyPath: m_RootOrder

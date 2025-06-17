@@ -9,4 +9,6 @@ public interface IInteractable
     public void Interact(Interactor interactor, out bool interactSuccesful);
 
     public void EndInteraction();
+
+    public bool RequiresCursorLock { get; }
 }

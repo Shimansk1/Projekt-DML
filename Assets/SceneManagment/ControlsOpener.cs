@@ -15,6 +15,14 @@ public class ControlsOpener : MonoBehaviour
     }
     public void ControlsExit()
     {
-        IsControlsOpen = false;
+        IsControlsOpen = !IsControlsOpen;
+        ControlsPanel.SetActive(IsControlsOpen);
+    }
+    void Update()
+    {
+        if (ControlsPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            ControlsExit();
+        }
     }
 }

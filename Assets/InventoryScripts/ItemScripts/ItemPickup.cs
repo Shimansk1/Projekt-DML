@@ -54,12 +54,16 @@ public class ItemPickup : MonoBehaviour
 
         if (!inventory) return;
 
-        if (inventory.AddToInventory(ItemData, 1))
-        {
-            SaveGameManager.data.collectedItems.Add(id);
-            Destroy(this.gameObject);
-            Debug.Log("item picked up");
-        }
+            if (inventory.AddToInventory(ItemData, 1))
+            {
+                SaveGameManager.data.collectedItems.Add(id);
+                Destroy(this.gameObject);
+                Debug.Log("item picked up");
+
+                TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+                if (tutorial != null)
+                    tutorial.MarkStepComplete("pickupItem");
+            }
         }
     }
     

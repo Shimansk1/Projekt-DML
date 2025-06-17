@@ -73,7 +73,15 @@ public class InventorySlot : ISerializationCallbackReceiver
     public void RemoveFromStack(int amount)
     {
         stackSize -= amount;
+        if (stackSize <= 0)
+        {
+            stackSize = 0;
+            ClearSlot();
+        }
+        PlayerInventoryHolder.OnPlayerInventoryChanged?.Invoke();
     }
+
+
     public bool SplitStack(out InventorySlot splitStack)
     {
         if (stackSize <= 1)

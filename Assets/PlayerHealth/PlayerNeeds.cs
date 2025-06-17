@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TransformSaveLoadSystem;
+using UnityEngine.InputSystem;
 
 public class PlayerNeeds : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class PlayerNeeds : MonoBehaviour
     public int currentHunger = 100;
     public int currentThirst = 100;
 
-    public float hungerDecreaseInterval = 10f;
-    public float thirstDecreaseInterval = 7f;
+    public float hungerDecreaseInterval = 7f;
+    public float thirstDecreaseInterval = 3f;
 
     private float hungerTimer;
     private float thirstTimer;
@@ -18,6 +19,11 @@ public class PlayerNeeds : MonoBehaviour
     private float damageCooldown = 1f;
 
     [SerializeField] private PlayerHealth playerHealth;
+
+    // Nové proměnné pro heal
+    public float healInterval = 3f;
+    public int healAmount = 1;
+    private float healTimer = 0f;
 
     void Start()
     {
@@ -32,6 +38,7 @@ public class PlayerNeeds : MonoBehaviour
     {
         hungerTimer += Time.deltaTime;
         thirstTimer += Time.deltaTime;
+        healTimer += Time.deltaTime;
 
         if (hungerTimer >= hungerDecreaseInterval)
         {
@@ -51,8 +58,33 @@ public class PlayerNeeds : MonoBehaviour
             lastDamageTime = Time.time;
         }
 
+        if (currentHunger > 80 && currentThirst > 80 && healTimer >= healInterval)
+        {
+            playerHealth.Heal(healAmount); 
+            healTimer = 0f;
+        }
+
+        if (Keyboard.current.hKey.wasPressedThisFrame)
+        {
+            GetComponent<Canteen>().Drink();
+            TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+            if (tutorial != null)
+                tutorial.MarkStepComplete("drinkCanteen");
+        }
+
         SaveGameManageris.CurrentSaveData.playerData.CurrentHunger = currentHunger;
         SaveGameManageris.CurrentSaveData.playerData.CurrentThirst = currentThirst;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("WaterSource"))
+        {
+            GetComponent<Canteen>().Refill();
+            TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+            if (tutorial != null)
+                tutorial.MarkStepComplete("refillCanteen");
+        }
     }
 
     public void ModifyHunger(int amount)

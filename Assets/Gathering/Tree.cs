@@ -31,6 +31,10 @@ public class Tree : MonoBehaviour
 
             StartCoroutine(RespawnTree());
             transform.position -= new Vector3(0, 100f, 0); // Schováme strom pod zem
+            TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+            if (tutorial != null)
+                tutorial.MarkStepComplete("chopTree");
+
         }
     }
 

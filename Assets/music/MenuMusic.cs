@@ -7,7 +7,6 @@ public class MenuMusic : MonoBehaviour
 
     void Awake()
     {
-       // DontDestroyOnLoad(gameObject); // Hudba zùstane hrát i pøi pøechodu scén
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -18,5 +17,6 @@ public class MenuMusic : MonoBehaviour
         audioSource.playOnAwake = false;
 
         audioSource.Play();
+       // DontDestroyOnLoad(gameObject); // Hudba zùstane hrát i pøi pøechodu scén
     }
 }

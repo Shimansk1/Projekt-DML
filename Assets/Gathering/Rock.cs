@@ -40,6 +40,9 @@ public class Rock : MonoBehaviour
             StartCoroutine(RespawnRock());
             meshRenderer.enabled = false;
             rockCollider.enabled = false;
+            TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+            if (tutorial != null)
+                tutorial.MarkStepComplete("mineRock");
         }
     }
 

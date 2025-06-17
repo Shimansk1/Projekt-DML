@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Gatherer : MonoBehaviour
 {
-    public float interactionRange = 2f; 
-    public int baseDamage = 1; 
+    public float interactionRange = 2f;
+    public int baseDamage = 1;
     public int axeDamage = 2;
+
+    [Header("Sound Effects")]
+    public AudioClip treeChopSound;
+    public AudioClip rockMineSound;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -17,20 +32,20 @@ public class Gatherer : MonoBehaviour
                 if (hit.collider.CompareTag("Tree"))
                 {
                     hit.collider.GetComponent<Tree>()?.ChopTree();
+                    if (treeChopSound != null)
+                    {
+                        audioSource.PlayOneShot(treeChopSound);
+                    }
                 }
                 else if (hit.collider.CompareTag("Rock"))
                 {
                     hit.collider.GetComponent<Rock>()?.MineRock();
+                    if (rockMineSound != null)
+                    {
+                        audioSource.PlayOneShot(rockMineSound);
+                    }
                 }
             }
         }
-    }
-
-
-
-    private bool HasAxe()
-    {
-        // TODO: Tady pøidej logiku pro kontrolu inventáøe
-        return false; // Momentálnì vždy false, ale mùžeš propojit s inventáøem
     }
 }

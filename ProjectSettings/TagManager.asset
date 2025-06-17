@@ -4,18 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hrac
-  - Rock
-  - Tree
   - UI
+  - Pickup
+  - Tree
+  - Rock
+  - WaterSource
+  - bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - GROUND
   - Water
   - UI
-  - GROUND
+  - Enemy
   - Interactable
   - 
   - 

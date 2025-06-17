@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4408903617954460727}
   - component: {fileID: 413558772418053088}
   - component: {fileID: 7693397922371951685}
+  - component: {fileID: 3068419166528550225}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -75,6 +76,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickupRadius: 2
   ItemData: {fileID: 11400000, guid: eff61158e49ffad4885e55b9f11e2f34, type: 2}
+  _rotationSpeed: 20
+  itemSaveData:
+    ItemData: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3068419166528550225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824839790319684347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbac5eb8b98fee4428cfe742889c1924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickupRadius: 1
+  ItemData: {fileID: 11400000, guid: a43d170901b25cb4e95713be26738d69, type: 2}
   _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 0}

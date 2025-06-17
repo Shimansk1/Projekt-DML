@@ -23,13 +23,17 @@ public class Interactor : MonoBehaviour
             {
                 var interactable = colliders[i].GetComponentInParent<IInteractable>();
 
-                Debug.Log($"Nalezený objekt: {colliders[i].name}, interactable: {interactable}");
+                if (interactable != null)
+                {
+                    if (interactable.RequiresCursorLock)
+                    {
+                        mouseLook.canMove = false;
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
+                    }
 
-                mouseLook.canMove = false;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-
-                if (interactable != null) StartInteraction(interactable);
+                    StartInteraction(interactable);
+                }
             }
 
         }
@@ -44,6 +48,10 @@ public class Interactor : MonoBehaviour
     {
         interactable.Interact(this, out bool interactSuccesful);
         IsInteracting = true;
+
+        TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+        if (tutorial != null)
+        tutorial.MarkStepComplete("openChest");
     }
 
     void EndInteraction()

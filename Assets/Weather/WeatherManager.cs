@@ -20,11 +20,9 @@ public class WeatherManager : MonoBehaviour
     public float weatherChangeInterval = 300f;
     public Light directionalLight;
 
-    // Přechodová mlha (slabší)
     public Color transitionFogColor = new Color(0.5f, 0.5f, 0.5f);
     public float transitionFogDensity = 0.01f;
 
-    // Foggy počasí (hustší)
     public Color foggyColor = new Color(0.4f, 0.4f, 0.4f);
     public float foggyDensity = 0.035f;
 

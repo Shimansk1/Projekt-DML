@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,28 +14,52 @@ public class PlayerMovementScript : MonoBehaviour
     public Transform WaterCheck;
     public float GroundDistance = 0.4f;
     public LayerMask GroundMask;
-    public LayerMask WaterLayer; 
+    public LayerMask WaterLayer;
 
     private Vector3 velocity;
     private bool IsGrounded;
-    public bool IsSwimming; 
+    public bool IsSwimming;
+    [Header("Sound Effects")]
+    public AudioClip swimmingSound;
+    private AudioSource audioSource;
+    private bool isPlayingSwimSound = false;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     void Update()
     {
         if (Keyboard.current.leftShiftKey.isPressed && !IsSwimming && IsGrounded && Keyboard.current.wKey.isPressed)
         {
             Speed = 16f;
-            //Debug.Log("is sprinting");
         }
         else
         {
             Speed = 12f;
-            //Debug.Log("isnt sprinting");
         }
 
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
 
         IsSwimming = Physics.CheckSphere(WaterCheck.position, GroundDistance, WaterLayer);
+
+        if (IsSwimming && !isPlayingSwimSound && swimmingSound != null)
+        {
+            audioSource.clip = swimmingSound;
+            audioSource.loop = true;
+            audioSource.Play();
+            isPlayingSwimSound = true;
+        }
+        else if (!IsSwimming && isPlayingSwimSound)
+        {
+            audioSource.Stop();
+            isPlayingSwimSound = false;
+        }
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -45,14 +68,14 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (IsSwimming)
         {
-            velocity.y = 0f; 
-            controller.Move(move * (Speed / 2) * Time.deltaTime); 
+            velocity.y = 0f;
+            controller.Move(move * (Speed / 2) * Time.deltaTime);
         }
         else
         {
             if (IsGrounded && velocity.y < 0)
             {
-                velocity.y = -2f; 
+                velocity.y = -2f;
             }
 
             velocity.y += Gravity * Time.deltaTime;

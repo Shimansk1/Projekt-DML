@@ -15,7 +15,14 @@ MonoBehaviour:
   ID: 4
   DisplayName: Cutlass
   Description: A lethal weapon essencial for every pirate
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 269b1323986b2b84092f3579b688717b, type: 3}
   MaxStackSize: 1
   GoldValue: 0
-  ItemPrefab: {fileID: 0}
+  ItemPrefab: {fileID: 7416393583099814768, guid: e296e99334ee71549a5581449dae44e1, type: 3}
+  itemType: 2
+  hungerRestore: 0
+  thirstRestore: 0
+  weaponDamage: 45
+  weaponRange: 3
+  attackCooldown: 0.6
+  WeaponInHandPrefab: {fileID: 115264, guid: 622fc8383c73fb04bbc9754dd1899041, type: 3}

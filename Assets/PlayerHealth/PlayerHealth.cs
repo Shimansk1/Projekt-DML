@@ -21,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
     public bool isDead = false;
     private Vector3 lastGroundedPosition;
 
-    // Cooldown
     private bool damageCooldown = false;
     public float damageCooldownDuration = 2f;
 
@@ -31,6 +30,10 @@ public class PlayerHealth : MonoBehaviour
         if (saveGameManager == null) Debug.LogError("SaveGameManager není ve scénì!");
 
         lastGroundedPosition = transform.position;
+    }
+    public void Heal(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
 
     void Update()
